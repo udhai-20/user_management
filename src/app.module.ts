@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { DocumentsModule } from './documents/documents.module';
-import { IngestionModule } from './ingestion/ingestion.module';
 import { CorsMiddleware } from './middleware/corsMiddleware';
 import { LoggerMiddleware } from './logger/logger.Middleware';
 import { authMiddleware } from './middleware/auth.middleware';
@@ -31,7 +30,6 @@ import { authMiddleware } from './middleware/auth.middleware';
     AuthModule,
     UsersModule,
     DocumentsModule,
-    IngestionModule,
   ],
 })
 export class AppModule implements NestModule {
