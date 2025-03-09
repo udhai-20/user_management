@@ -38,7 +38,7 @@ export class AppModule implements NestModule {
     .apply(CorsMiddleware)
     .forRoutes({ path: '*', method: RequestMethod.ALL });
     consumer.apply(LoggerMiddleware).forRoutes('*');
-    consumer.apply(authMiddleware).exclude({ path: '/login', method: RequestMethod.POST }).forRoutes("*"); 
+    consumer.apply(authMiddleware).exclude({ path: '/auth/login', method: RequestMethod.POST },{ path: '/auth/register', method: RequestMethod.POST },{ path: '/auth/logout', method: RequestMethod.POST }).forRoutes("*"); 
   }
 
 }

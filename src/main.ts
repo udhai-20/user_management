@@ -17,8 +17,8 @@ async function bootstrap() {
   // console.log('existingAdmin:', existingAdmin);
   if (!existingAdmin) {
     await userService.create({
-      firstName:"Admin",
-      lastName:"User",
+      firstName: "Admin",
+      lastName: "User",
       email: 'admin123@gmail.com',
       password: 'Admin@123',
       role: UserRole.ADMIN,
@@ -27,7 +27,7 @@ async function bootstrap() {
   } else {
     console.log('Admin user already exists.');
   }
-  
+
   // Enable CORS?? client url//
   app.enableCors();
   app.useGlobalInterceptors(new ResponseInterceptor());
@@ -42,8 +42,15 @@ async function bootstrap() {
 
   // Swagger documentation setup
   const config = new DocumentBuilder()
-    .setTitle('APi For User Management')
-    .setDescription('API for document ingestion')
+    .setTitle('API For User & Document Management')
+    .setDescription(
+      `This API provides functionalities for:
+      Auth Module: Register, Login, Logout, and Profile retrieval
+      User Module (Admin Only):Get all users, delete users, and update roles
+      Document Module(editor,viewer):user can upload,update, delete, getall, getbyid, updateStatus(internal)
+      service to service authentication with special headers
+      `
+    )
     .setVersion('1.0')
     .addCookieAuth('access_token')
     .build();

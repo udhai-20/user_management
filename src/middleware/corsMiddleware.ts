@@ -1,15 +1,14 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import * as dotenv from 'dotenv';
-dotenv.config();
+
 
 @Injectable()
 export class CorsMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    const origin = req.headers.origin as string || "http://localhost:3000";
+    const origin = req.headers.origin as string || "https://user-management-5e76.onrender.com";
     const domain = new URL(origin).hostname; // Extracting the domain from the origin
-    console.log('origin:', origin);
-    if (domain.endsWith('') || origin.startsWith('http://localhost:3000') || origin.startsWith('http://localhost:3001')) {
+    // console.log('origin:', origin);
+    if (domain.endsWith('.onrender.com') || origin.startsWith('http://localhost:3000') || origin.startsWith('http://localhost:3001')) {
       res.header('Access-Control-Allow-Origin', origin);
     }
 

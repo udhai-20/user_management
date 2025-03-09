@@ -102,28 +102,26 @@ export class DocumentsController {
     }
   }
 
+  //ony internal service to service//
   @Patch('/updateStatus/:id')
-   @ApiParam({ name: 'id', required: true, description: 'Document ID' })
+  //  @ApiParam({ name: 'id', required: true, description: 'Document ID' })
   // @ApiConsumes('multipart/form-data')
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        documentStatus: { type: 'string' },
-      },
-    },
-  })
-  @ApiResponse({ status: 200, description: 'Document updated successfully' })
-  @ApiResponse({ status: 404, description: 'Document not found' })
+  // @ApiBody({
+  //   schema: {
+  //     type: 'object',
+  //     properties: {
+  //       documentStatus: { type: 'string' },
+  //     },
+  //   },
+  // })
+  // @ApiResponse({ status: 200, description: 'Document updated successfully' })
+  // @ApiResponse({ status: 404, description: 'Document not found' })
   @UseGuards(RolesGuard)
   @Roles(UserRole.EDITOR,UserRole.VIEWER)
    async updateStatus(
     @Param('id') id: string,
     @Body("documentStatus") documentStatus: string,
-    // @Request() req?,
   ) {
-    // const cookie=req.header.cookie;
-    // console.log('req:', req.headers)
     const response= await this.documentsService.updateStatus({documentId:id,documentStatus});
     return{
       message:"Document updated successfully",
