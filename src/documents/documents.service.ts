@@ -39,7 +39,7 @@ export class DocumentsService {
 
     const savedDocument = await this.documentsRepository.save(document);
     // Start the ingestion process asynchronously
-    this.processDocument(savedDocument.id, cookie).catch(error => {
+    this.processDocument(savedDocument.id).catch(error => {
       console.error(`Error processing document ${savedDocument.id}:`, error);
     });
 
@@ -100,13 +100,14 @@ export class DocumentsService {
       document.fileType = file.mimetype;
       document.fileSize = file.size;
       //once user update then again need to process and need to get mock_ingestion response ya??//
-      this.processDocument(id, cookie).catch(error => {
+      this.processDocument(id).catch(error => {
         console.error(`Error processing document ${id}:`, error);
       });
 
     }
     return await this.documentsRepository.save(document);
   }
+  
 
 
   async remove(id: string, user: User): Promise<void> {
@@ -142,7 +143,7 @@ export class DocumentsService {
     }
   }
 
-  async processDocument(documentId: string, cookie: any): Promise<void> {
+  async processDocument(documentId: string): Promise<void> {
     const document = await this.documentsRepository.findOne({
       where: { id: documentId },
     });

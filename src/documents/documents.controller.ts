@@ -102,6 +102,23 @@ export class DocumentsController {
     }
   }
 
+  // @Get('reprocess/:id')
+  // @UseGuards(RolesGuard)
+  // @Roles(UserRole.VIEWER, UserRole.EDITOR)
+  // @ApiOperation({ summary: 'process document Ingestion if failed' })
+  // @ApiParam({ name: 'id', required: true, description: 'Document ID' })
+  // @ApiResponse({ status: 200, description: 'Returns document ' })
+  // @ApiResponse({ status: 404, description: 'Document not found' })
+  // async reprocessFailedDoc(@Param('id') id: string, @Request() req) {
+  //   const response= await this.documentsService.findOne(id, req.user);
+  //   return{
+  //     message:"Document retrieved successfully",
+  //     data:response
+  //   }
+  // }
+
+
+
   //ony internal service to service//
   @Patch('/updateStatus/:id')
   //  @ApiParam({ name: 'id', required: true, description: 'Document ID' })
@@ -161,6 +178,8 @@ export class DocumentsController {
       data:response
     }
   }
+
+
 
 
   @Delete(':id')
