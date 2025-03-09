@@ -54,7 +54,8 @@ describe('AuthController', () => {
         response.cookie('access_token', 'mocked_token', {
           httpOnly: true,
           secure: true,
-          sameSite: 'strict',
+          sameSite: 'None',
+           domain: '.onrender.com',
           maxAge: 1000 * 60 * 60 * 24,
         });
         response.send({ user });
