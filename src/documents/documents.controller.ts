@@ -102,20 +102,37 @@ export class DocumentsController {
     }
   }
 
-  // @Get('reprocess/:id')
-  // @UseGuards(RolesGuard)
-  // @Roles(UserRole.VIEWER, UserRole.EDITOR)
-  // @ApiOperation({ summary: 'process document Ingestion if failed' })
-  // @ApiParam({ name: 'id', required: true, description: 'Document ID' })
-  // @ApiResponse({ status: 200, description: 'Returns document ' })
-  // @ApiResponse({ status: 404, description: 'Document not found' })
-  // async reprocessFailedDoc(@Param('id') id: string, @Request() req) {
-  //   const response= await this.documentsService.findOne(id, req.user);
-  //   return{
-  //     message:"Document retrieved successfully",
-  //     data:response
-  //   }
-  // }
+  @Get('reprocess/:id')
+  @UseGuards(RolesGuard)
+  @Roles(UserRole.VIEWER, UserRole.EDITOR)
+  @ApiOperation({ summary: 'process document Ingestion if failed' })
+  @ApiParam({ name: 'id', required: true, description: 'Document ID' })
+  @ApiResponse({ status: 200, description: 'Returns after process status ' })
+  @ApiResponse({ status: 404, description: 'Document not found' })
+  async reprocessFailedDoc(@Param('id') id: string) {
+    const response= await this.documentsService.processDocument(id);
+    return{
+      message:"Document retrieved successfully",
+      data:response
+    }
+  }
+
+  @Get('docStatus/:id')
+  @UseGuards(RolesGuard)
+  @Roles(UserRole.VIEWER, UserRole.EDITOR)
+  @ApiOperation({ summary: 'get docStatus after upload' })
+  @ApiParam({ name: 'id', required: true, description: 'Document ID' })
+  @ApiResponse({ status: 200, description: 'Returns document ' })
+  @ApiResponse({ status: 404, description: 'Document not found' })
+  async documentStatus(@Param('id') id: string,  @Request() req) {
+    const response= await this.documentsService.getDocumentStatus(id,req.user)
+    return{
+      message:"Document Status retrieved successfully",
+      data:response
+    }
+  }
+
+
 
 
 
@@ -138,6 +155,7 @@ export class DocumentsController {
    async updateStatus(
     @Param('id') id: string,
     @Body("documentStatus") documentStatus: string,
+    
   ) {
     const response= await this.documentsService.updateStatus({documentId:id,documentStatus});
     return{

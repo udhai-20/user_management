@@ -47,7 +47,7 @@ async function bootstrap() {
       `This API provides functionalities for:
       Auth Module: Register, Login, Logout, and Profile retrieval
       User Module (Admin Only):Get all users, delete users, and update roles
-      Document Module(editor,viewer):user can upload,update, delete, getall, getbyid, updateStatus(internal)
+      Document Module(editor,viewer):user can upload,update, delete, getall, getbyid, updateStatus(internal),docStatus,docReprocess
       service to service authentication with special headers
       `
     )
