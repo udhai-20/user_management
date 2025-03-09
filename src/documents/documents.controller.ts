@@ -104,7 +104,7 @@ export class DocumentsController {
   @Get('reprocess/:id')
   @UseGuards(RolesGuard)
   @Roles(UserRole.VIEWER, UserRole.EDITOR)
-  @ApiOperation({ summary: 'process document Ingestion if failed' })
+  @ApiOperation({ summary: 'process document Ingestion if failed (Editor, Viewer)' })
   @ApiParam({ name: 'id', required: true, description: 'Document ID' })
   @ApiResponse({ status: 200, description: 'Returns after process status ' })
   @ApiResponse({ status: 404, description: 'Document not found' })
@@ -118,7 +118,7 @@ export class DocumentsController {
   @Get('docStatus/:id')
   @UseGuards(RolesGuard)
   @Roles(UserRole.VIEWER, UserRole.EDITOR)
-  @ApiOperation({ summary: 'get docStatus after upload' })
+  @ApiOperation({ summary: 'get docStatus after upload (Editor, Viewer)' })
   @ApiParam({ name: 'id', required: true, description: 'Document ID' })
   @ApiResponse({ status: 200, description: 'Returns document ' })
   @ApiResponse({ status: 404, description: 'Document not found' })
@@ -136,18 +136,6 @@ export class DocumentsController {
 
   //ony internal service to service//
   @Patch('/updateStatus/:id')
-  //  @ApiParam({ name: 'id', required: true, description: 'Document ID' })
-  // @ApiConsumes('multipart/form-data')
-  // @ApiBody({
-  //   schema: {
-  //     type: 'object',
-  //     properties: {
-  //       documentStatus: { type: 'string' },
-  //     },
-  //   },
-  // })
-  // @ApiResponse({ status: 200, description: 'Document updated successfully' })
-  // @ApiResponse({ status: 404, description: 'Document not found' })
   @UseGuards(RolesGuard)
   @Roles(UserRole.EDITOR,UserRole.VIEWER)
    async updateStatus(
