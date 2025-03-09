@@ -17,7 +17,6 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiConsumes, ApiBody
 import { DocumentsService } from './documents.service';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import * as path from 'path';
 import * as fs from 'fs';
 import { fileUploadOptions } from 'src/utils';
@@ -110,10 +109,9 @@ export class DocumentsController {
   @ApiResponse({ status: 200, description: 'Returns after process status ' })
   @ApiResponse({ status: 404, description: 'Document not found' })
   async reprocessFailedDoc(@Param('id') id: string) {
-    const response= await this.documentsService.processDocument(id);
+    await this.documentsService.processDocument(id);
     return{
-      message:"Document retrieved successfully",
-      data:response
+      message:"Document processed successfully",
     }
   }
 

@@ -172,6 +172,7 @@ export class DocumentsService {
       document.status = response.data.status;
       await this.documentsRepository.save(document);
     } catch (error) {
+      console.log('error:', error);
       // Update status to failed
       document.status = DocumentStatus.FAILED;
       document.errorMessage = error.message;
